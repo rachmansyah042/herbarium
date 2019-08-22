@@ -24,19 +24,16 @@ class Auth extends CI_Controller {
             'required' => 'Password Tidak Boleh Kosong'
         ]);
  
-
-        if($this->form_validation->run() == false) { 
-
+        if($this->session->userdata('id_user')){
+            redirect('Herbarium');
+        }
+        else if($this->form_validation->run() == false) { 
             $this->load->view('templates/header');
             $this->load->view('sign_in');
             $this->load->view('templates/footer');
-        } 
-        
-        else 
-        
-        {
-            $this->onLogin();
-           
+        }  
+        else {
+            $this->onLogin();   
         }      
 
     }
@@ -60,11 +57,9 @@ class Auth extends CI_Controller {
                     'username' => $apps->username,
                 );
                 $this->session->set_userdata($session_data);
-                // print_r($session_data);                
-
-                $this->load->view('templates/header_admin');
-                $this->load->view('admin/admin_herbarium');
-                $this->load->view('templates/footer');
+                // print_r($session_data);      
+                
+                redirect('Herbarium');
             }
 
 

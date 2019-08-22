@@ -14,32 +14,13 @@ class Admin extends CI_Controller {
 
     public function index() {
 
-        
-        $data['familia'] = $this->db->get('familia')->result_array();
-
-        $this->load->view('templates/header_admin');
-        $this->load->view('admin/admin_herbarium',$data);
-        $this->load->view('templates/footer');
-
-        // print_r($data);
        
     }
 
-
-    public function famili() {
-
-        $data['familia'] = $this->db->get('familia')->result_array();
-
-        $this->load->view('templates/header_admin');
-        $this->load->view('admin/admin_famili',$data);
-        $this->load->view('templates/footer');
-        // print_r($data);
-    }
-
-    public function user() {
-        $this->load->view('templates/header_admin');
-        $this->load->view('admin/admin_user');
-        $this->load->view('templates/footer');
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('Auth');
     }
 
 

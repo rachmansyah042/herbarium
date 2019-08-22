@@ -70,6 +70,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
+
+// Config Database Hosting
+
+// 'hostname' => 'herbarium.fahutan.ipb.ac.id',
+// 'username' => 'herbarium',
+// 'password' => 'yt1I!dPXIMtE',
+// 'database' => 'dbherbariumfahutan',
+// Config Database Mac OS
+// 'hostname' => 'localhost',
+// 'username' => 'root',
+// 'password' => 'root',
+// 'database' => 'db_herbarium'
+// Config Database Windows
+// 'hostname' => 'localhost',
+// 'username' => 'root',
+// 'password' => '',
+// 'database' => 'db_herbarium'
+
 $active_group = 'default';
 $query_builder = TRUE;
 

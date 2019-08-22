@@ -22,7 +22,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-padding">
-  <a class="navbar-brand" href="<?= base_url('Admin') ?>">Herbarium</a>
+  <a class="navbar-brand" href="<?= base_url('Herbarium') ?>">Herbarium</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -33,11 +33,11 @@
           Super Admin
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="<?= base_url('Admin/famili') ?>">Famili</a>
-          <a class="dropdown-item" href="<?= base_url('Admin') ?>">Herbarium</a>
-          <a class="dropdown-item" href="<?= base_url('Admin/user') ?>">User</a>
+          <a class="dropdown-item" href="<?= base_url('Famili') ?>">Famili</a>
+          <a class="dropdown-item" href="<?= base_url('Herbarium') ?>">Herbarium</a>
+          <a class="dropdown-item" href="<?= base_url('User') ?>">User</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Keluar</a>
+          <a class="dropdown-item" href="<?= base_url('Admin/logout') ?>">Keluar</a>
         </div>
       </li>
     </ul>

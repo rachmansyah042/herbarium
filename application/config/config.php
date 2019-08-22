@@ -23,8 +23,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/herbarium/'; 
 
+// config local mac
+// $config['base_url'] = 'http://localhost:8888/herbarium/'; 
+// Config Hosting Herbarium
+// $config['base_url'] = 'http://herbarium.fahutan.ipb.ac.id/';
+// Config Hosting Local Windows
+$config['base_url'] = 'http://localhost/herbarium/';  
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -3,6 +3,28 @@
     $('#datepicker').datepicker({
         uiLibrary: 'bootstrap4'
     });
+
+    function previewImage() {
+
+    var oFReader = new FileReader();
+     oFReader.readAsDataURL(document.getElementById("herbarium_pict").files[0]);
+
+    oFReader.onload = function(oFREvent) {
+      document.getElementById("herb_pic").src = oFREvent.target.result;
+            
+    };
+    }
+
+    function realImage() {
+        
+    var realPict = new FileReader();
+     realPict.readAsDataURL(document.getElementById("real_pic").files[0]);
+
+    realPict.onload = function(oFREvent) {
+      document.getElementById("r_pic").src = oFREvent.target.result;
+
+    }
+    };
 </script>
 
 

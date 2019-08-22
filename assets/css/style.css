@@ -17,6 +17,18 @@
     color: #28a745;
 }
 
+.img-collection {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin-bottom: 10px;
+    /* border: 1px solid grey; */
+}
+
+
+/* form input */
+
 :root {
     --input-padding-x: .75rem;
     --input-padding-y: .75rem;

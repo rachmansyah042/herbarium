@@ -4,8 +4,8 @@
 
     <div class="wrap-search">
         <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Cari" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
         
         <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-secondary btn-sm ml-auto">Tambahkan Herbarium</button>
         </form>
@@ -23,24 +23,24 @@
         </div>
         <div class="modal-body">
             
-        <form class="form-signin">
+        <form class="form-signin" action="<?= base_url('Herbarium/AddHerbarium') ?>" method="post" enctype="multipart/form-data">
         <div class="form-label-group mb-3">
-            <input type="text" id="spesies" class="form-control" placeholder="Nama Spesies">
+            <input type="text" id="spesies" name="species" class="form-control" placeholder="Nama Spesies">
             <label for="spesies">Nama Spesies</label>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id ="genus" class="form-control" placeholder="Nama Genus">
+            <input type="text" id ="genus" name="genus" class="form-control" placeholder="Nama Genus">
             <label for="genus">Nama Genus</label>
         </div>
 
         <div class="form-label-group mb-3">
-        <select class="form-control" id="inputGroupSelect01">
+        <select name="id_familia" class="form-control" id="inputGroupSelect01">
             <option selected disabled> Nama Famili</option>
             
             <?php foreach ($familia as $nama_famili) { ?>
 
-            <option value="1"><?= $nama_famili['familia'] ?></option>
+            <option value="<?= $nama_famili['id_familia'] ?>" ><?= $nama_famili['familia'] ?></option>
 
             <?php } ?>
 
@@ -48,66 +48,68 @@
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="lokal" class="form-control" placeholder="Nama Lokal">
+            <input type="text" id="lokal" name="local_name" class="form-control" placeholder="Nama Lokal">
             <label for="lokal">Nama Lokal</label>
         </div>
 
         <div class="input-group mb-3">
             <div class="col-6"> 
                 <span>Gambar Herbarium</span>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <img class="img-collection" id="herb_pic" src="<?= base_url('assets/images/default.jpg') ?>">
+                <input type="file" name="herbarium_pic" class="form-control-file" id="herbarium_pict" onchange="previewImage();">
             </div>
 
             <div class="col-6"> 
                 <span>Gambar Asli</span>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <img class="img-collection" id="r_pic" src="<?= base_url('assets/images/default.jpg') ?>"> 
+                <input type="file" name="real_pic" class="form-control-file" id="real_pic" onchange="realImage();">
             </div>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="morfologi" class="form-control" placeholder="Morfologi">
+            <input type="text" id="morfologi" name="leaf_morphology" class="form-control" placeholder="Morfologi">
             <label for="morfologi">Morfologi</label>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="koleksi" class="form-control" placeholder="No Koleksi">
+            <input type="text" id="koleksi" name="collection_num" class="form-control" placeholder="No Koleksi">
             <label for="koleksi">No Koleksi</label>
         </div>
 
         <div class="input-group mb-3">
-            <input  id="datepicker" class="form-control" placeholder="Tanggal Koleksi">
+            <input  id="datepicker" class="form-control" name="collection_date" placeholder="Tanggal Koleksi">
             <!-- <label for="datepicker">Tanggal Koleksi</label> -->
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="lokasi" class="form-control" placeholder="Lokasi">
+            <input type="text" id="lokasi" name="location" class="form-control" placeholder="Lokasi">
             <label for="lokasi">Lokasi</label>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="habitat" class="form-control" placeholder="Tipe Habitat">
+            <input type="text" id="habitat" name="habitat_type" class="form-control" placeholder="Tipe Habitat">
             <label for="habitat">Tipe Habitat</label>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="kolektor" class="form-control" placeholder="Kolektor">
+            <input type="text" id="kolektor" name="collector" class="form-control" placeholder="Kolektor">
             <label for="kolektor">Kolektor</label>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="text" id="identifikator" class="form-control" placeholder="Identifikator">
+            <input type="text" id="identifikator" name="identifier" class="form-control" placeholder="Identifikator">
             <label for="identifikator">Identifikator</label>
         </div>
 
         <div class="form-label-group mb-3">
-            <input type="textarea" id="catatan" class="form-control" placeholder="Catatan Lain">
+            <input type="textarea" id="catatan" name="notes" class="form-control" placeholder="Catatan Lain">
             <label for="catatan">Catatan Lain</label>
         </div>
 
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Tambah</button>
+            <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
         </div>
     </form>
@@ -124,6 +126,7 @@
                     <th scope="col">Famili</th>
                     <th scope="col">Morfologi</th>
                     <th scope="col" class="text-center">Lokasi</th>
+                    <th scope="col" class="text-center">Tgl koleksi</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
@@ -132,6 +135,7 @@
                     <td scope="row" class="text-center">1</td>
                     <td>Mark</td>
                     <td>Otto</td>
+                    <td>@mdo</td>
                     <td>@mdo</td>
                     <td>@mdo</td>
                     <td class="text-center">
