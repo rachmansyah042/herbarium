@@ -19,6 +19,7 @@ Class Herbarium extends CI_Controller {
 
     public function index() {
         $data['familia'] = $this->herbarium_model->GetFamili();
+        $data['herbarium'] = $this->herbarium_model->GetHerbarium();
 
         if($this->session->userdata('id_user')){
             $this->load->view('templates/header_admin');
@@ -34,6 +35,8 @@ Class Herbarium extends CI_Controller {
     public function addHerbarium() {
 
        $result = $this->herbarium_model->addHerb();
+       print_r($result);
+       
 
        if($result) {
         redirect('Herbarium');

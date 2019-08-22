@@ -7,16 +7,16 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Cari" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cari</button>
         
-        <button type="button" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-secondary btn-sm ml-auto">Tambahkan Herbarium</button>
+        <button type="button" data-toggle="modal" data-target="#addHerbarium" class="btn btn-secondary btn-sm ml-auto">Tambahkan Herbarium</button>
         </form>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+    <!-- Modal add herbarium -->
+    <div class="modal fade" id="addHerbarium" tabindex="-1" role="dialog" aria-labelledby="addHerbarium" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenter">Tambah Herbarium</h5>
+            <h5 class="modal-title" id="addHerbarium">Tambah Herbarium</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -56,7 +56,7 @@
             <div class="col-6"> 
                 <span>Gambar Herbarium</span>
                 <img class="img-collection" id="herb_pic" src="<?= base_url('assets/images/default.jpg') ?>">
-                <input type="file" name="herbarium_pic" class="form-control-file" id="herbarium_pict" onchange="previewImage();">
+                <input type="file" name="herbarium_pict" class="form-control-file" id="herbarium_pict" onchange="previewImage();">
             </div>
 
             <div class="col-6"> 
@@ -101,9 +101,9 @@
             <label for="identifikator">Identifikator</label>
         </div>
 
-        <div class="form-label-group mb-3">
-            <input type="textarea" id="catatan" name="notes" class="form-control" placeholder="Catatan Lain">
-            <label for="catatan">Catatan Lain</label>
+        <div class="form-group mb-3">
+        <label for="catatan">Catatan Lain</label>
+            <textarea type="text" rows="3" id="catatan" name="notes" class="form-control notes" placeholder="Catatan Lain"></textarea>
         </div>
 
         </div>
@@ -114,6 +114,27 @@
         </div>
     </form>
     </div>
+    </div>
+
+    <!-- modal delete -->
+    <div class="modal" id="deleteHerb" tabindex="-1" role="dialog" aria-labelledby="deleteHerb" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
     </div>
 
     <!-- table -->
@@ -127,23 +148,31 @@
                     <th scope="col">Morfologi</th>
                     <th scope="col" class="text-center">Lokasi</th>
                     <th scope="col" class="text-center">Tgl koleksi</th>
+                    <th scope="col" class="text-center">Kolektor</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
+
+             <?php foreach ($herbarium as $nama_herbarium) { ?>
+
                 <tr>
-                    <td scope="row" class="text-center">1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                    <td scope="row" class="text-center"><?= $nama_herbarium['id_herbarium'] ?></td>
+                    <td><?= $nama_herbarium['species'] ?></td>
+                    <td><?= $nama_herbarium['familia'] ?></td>
+                    <td><?= $nama_herbarium['leaf_morphology'] ?></td>
+                    <td><?= $nama_herbarium['location'] ?></td>
+                    <td><?= date("d-M-Y", strtotime($nama_herbarium['collection_date'])) ?></td>
+                    <td><?= $nama_herbarium['collector'] ?></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-success btn-sm">Lihat</button>
                         <button type="button" class="btn btn-info btn-sm">Ubah</button>
-                        <button type="button" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="button" data-toggle="modal" data-target="#deleteHerb" class="btn btn-danger btn-sm">Hapus</button>
                     </td>
                 </tr>
+
+            <?php } ?>
+
             </tbody>
         </table>
     </div>

@@ -26,6 +26,10 @@
     /* border: 1px solid grey; */
 }
 
+.notes {
+    resize: none;
+}
+
 
 /* form input */
 
