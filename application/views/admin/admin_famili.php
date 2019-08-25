@@ -7,9 +7,38 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         
-        <button type="button" class="btn btn-secondary btn-sm ml-auto">Tambahkan Famili</button>
+        <button type="button" data-toggle="modal" data-target="#addFamili" class="btn btn-secondary btn-sm ml-auto">Tambahkan Famili</button>
         </form>
     </div>
+
+    <!-- Modal add famili -->
+    <div class="modal fade" id="addFamili" tabindex="-1" role="dialog" aria-labelledby="addFamili" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addFamili">Tambah Famili</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            
+        <form class="form-signin" action="<?= base_url('Famili/AddFamili') ?>" method="post" enctype="multipart/form-data">
+        <div class="form-label-group mb-3">
+            <input type="text" id="spesies" name="familia" class="form-control" placeholder="Nama Famili">
+            <label for="spesies">Nama Famili</label>
+        </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </div>
+        </div>
+    </form>
+    </div>
+    </div>
+
 
     <div class="table-responsive-md">
         <table class="table table-hover">
@@ -38,5 +67,10 @@
 
             </tbody>
         </table>
+
+        <br>
+        <?php 
+        echo $this->pagination->create_links();
+        ?>
     </div>
 </div>

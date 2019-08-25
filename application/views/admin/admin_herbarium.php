@@ -1,6 +1,7 @@
 <div class="container"> 
 
     <p class="title-menu"> Herbarium </p>
+    
 
     <div class="wrap-search">
         <form class="form-inline my-2 my-lg-0">
@@ -34,7 +35,8 @@
             <label for="genus">Nama Genus</label>
         </div>
 
-        <div class="form-label-group mb-3">
+        <div class="form-group mb-3">
+        <label for="catatan">Nama Famili</label>
         <select name="id_familia" class="form-control" id="inputGroupSelect01">
             <option selected disabled> Nama Famili</option>
             
@@ -76,7 +78,8 @@
             <label for="koleksi">No Koleksi</label>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="form-group mb-3">
+        <label for="catatan">Tanggal Koleksi</label>
             <input  id="datepicker" class="form-control" name="collection_date" placeholder="Tanggal Koleksi">
             <!-- <label for="datepicker">Tanggal Koleksi</label> -->
         </div>
@@ -116,26 +119,146 @@
     </div>
     </div>
 
+    
+    <!-- Modal edit herbarium -->
+    
+    <?php foreach ($edit_herbarium as $edit_herbarium) { ?>
+
+    <div class="modal fade" id="editHerbarium<?= $edit_herbarium['id_herbarium']; ?>" tabindex="-1" role="dialog" aria-labelledby="editHerbarium" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="editHerbarium">Ubah Herbarium</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            
+        <form class="form-signin" action="<?= base_url('Herbarium/editHerbarium/'.$edit_herbarium['id_herbarium']); ?>" method="post" enctype="multipart/form-data">
+        <div class="form-label-group mb-3">
+            <input name= "id_herbarium" value="<?= $edit_herbarium['id_herbarium']; ?>" hidden>
+            <input name= "last_familia" value="<?= $edit_herbarium['id_familia']; ?>" hidden>
+            <input type="text" id="spesies" name="species" value="<?= $edit_herbarium['species']; ?>" class="form-control" placeholder="Nama Spesies">
+            <label for="spesies">Nama Spesies</label>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id ="genus" name="genus" value="<?= $edit_herbarium['genus']; ?>" class="form-control" placeholder="Nama Genus">
+            <label for="genus">Nama Genus</label>
+        </div>
+
+        <div class="form-group mb-3">
+        <label for="catatan">Nama Famili</label>
+        <select name="id_familia" class="form-control" id="id_familia">
+            <!-- <option selected disabled> Nama Famili</option> -->
+            
+            <?php foreach ($familia as $nama_famili) { ?>
+
+            <option value="<?= $nama_famili['id_familia'] ?>" <?= $edit_herbarium['id_familia'] == $nama_famili['id_familia'] ? "selected" : '' ?> > <?= $nama_famili['familia'] ?></option>
+
+            <?php } ?>
+
+        </select>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="lokal" name="local_name" value="<?= $edit_herbarium['local_name']; ?>" class="form-control" placeholder="Nama Lokal">
+            <label for="lokal">Nama Lokal</label>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="col-6"> 
+                <span>Gambar Herbarium</span>
+                <img class="img-collection" id="herb_pic" src="<?= base_url('assets/images/herbarium/'.$edit_herbarium['herbarium_pic']) ?>">
+                <input type="file" name="herbarium_pict" class="form-control-file" id="herbarium_pict" onchange="previewImage();">
+            </div>
+
+            <div class="col-6"> 
+                <span>Gambar Asli</span>
+                <img class="img-collection" id="r_pic" src="<?= base_url('assets/images/real/'.$edit_herbarium['real_pic']) ?>"> 
+                <input type="file" name="real_pic" class="form-control-file" id="real_pic" onchange="realImage();">
+            </div>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="morfologi" name="leaf_morphology" value="<?= $edit_herbarium['leaf_morphology']; ?>" class="form-control" placeholder="Morfologi">
+            <label for="morfologi">Morfologi</label>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="koleksi" name="collection_num" value="<?= $edit_herbarium['collection_num']; ?>" class="form-control" placeholder="No Koleksi">
+            <label for="koleksi">No Koleksi</label>
+        </div>
+
+        <div class="form-group mb-3">
+        <label for="catatan">Tanggal Koleksi</label>
+            <input  id="datepicker" class="form-control" name="collection_date" value="<?= $edit_herbarium['collection_date']; ?>" placeholder="Tanggal Koleksi">
+            <!-- <label for="datepicker">Tanggal Koleksi</label> -->
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="lokasi" name="location" value="<?= $edit_herbarium['location']; ?>" class="form-control" placeholder="Lokasi">
+            <label for="lokasi">Lokasi</label>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="habitat" name="habitat_type" value="<?= $edit_herbarium['habitat_type']; ?>" class="form-control" placeholder="Tipe Habitat">
+            <label for="habitat">Tipe Habitat</label>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="kolektor" name="collector" value="<?= $edit_herbarium['collector']; ?>" class="form-control" placeholder="Kolektor">
+            <label for="kolektor">Kolektor</label>
+        </div>
+
+        <div class="form-label-group mb-3">
+            <input type="text" id="identifikator" name="identifier" value="<?= $edit_herbarium['identifier']; ?>" class="form-control" placeholder="Identifikator">
+            <label for="identifikator">Identifikator</label>
+        </div>
+
+        <div class="form-group mb-3">
+        <label for="catatan">Catatan Lain</label>
+            <textarea type="text" rows="3" id="notes" name="notes" class="form-control notes" placeholder="Catatan Lain"> <?=  $edit_herbarium['notes']; ?></textarea>
+        </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Ubah</button>
+        </div>
+        </div>
+    </form>
+    </div>
+    </div>
+
+    <?php } ?>
+
     <!-- modal delete -->
-    <div class="modal" id="deleteHerb" tabindex="-1" role="dialog" aria-labelledby="deleteHerb" aria-hidden="true">
+    <?php foreach ($herbarium as $nama_herbarium) { ?>
+    <div class="modal" id="deleteHerb<?= $nama_herbarium['id_herbarium']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteHerb" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Hapus Herbarium</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+            <form action="<?= base_url('Herbarium/delete/'.$nama_herbarium['id_herbarium']); ?>" method="post">
+                <p>Anda yakin ingin menghapus ? </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="text" value="<?=$nama_herbarium['id_familia']; ?>" name="id_familia" hidden>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Hapus</button>
             </div>
+            </form>
             </div>
         </div>
     </div>
+    <?php } ?>
 
     <!-- table -->
     <div class="table-responsive-md">
@@ -149,25 +272,25 @@
                     <th scope="col" class="text-center">Lokasi</th>
                     <th scope="col" class="text-center">Tgl koleksi</th>
                     <th scope="col" class="text-center">Kolektor</th>
-                    <th scope="col" class="text-center">Action</th>
+                    <th scope="col" class="text-center table-action">Action</th>
                 </tr>
             </thead>
             <tbody>
 
-             <?php foreach ($herbarium as $nama_herbarium) { ?>
-
+             <?php $no=1;foreach ($herbarium as $nama_herbarium) { ?>
+                
                 <tr>
-                    <td scope="row" class="text-center"><?= $nama_herbarium['id_herbarium'] ?></td>
+                    <td scope="row" class="text-center"><?= $no++ ?></td>
                     <td><?= $nama_herbarium['species'] ?></td>
                     <td><?= $nama_herbarium['familia'] ?></td>
                     <td><?= $nama_herbarium['leaf_morphology'] ?></td>
                     <td><?= $nama_herbarium['location'] ?></td>
-                    <td><?= date("d-M-Y", strtotime($nama_herbarium['collection_date'])) ?></td>
+                    <td class="text-center"><?= date("d-M-Y", strtotime($nama_herbarium['collection_date'])) ?></td>
                     <td><?= $nama_herbarium['collector'] ?></td>
                     <td class="text-center">
                         <button type="button" class="btn btn-success btn-sm">Lihat</button>
-                        <button type="button" class="btn btn-info btn-sm">Ubah</button>
-                        <button type="button" data-toggle="modal" data-target="#deleteHerb" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="button" data-toggle="modal" data-target="#editHerbarium<?= $nama_herbarium['id_herbarium']; ?>" class="btn btn-info btn-sm">Ubah</button>
+                        <button type="button" data-toggle="modal" data-target="#deleteHerb<?= $nama_herbarium['id_herbarium']; ?>" class="btn btn-danger btn-sm">Hapus</button>
                     </td>
                 </tr>
 

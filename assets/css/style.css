@@ -30,6 +30,14 @@
     resize: none;
 }
 
+.modal-footer {
+    border-top: none !important;
+}
+
+.table-action {
+    width: 190px;
+}
+
 
 /* form input */
 
