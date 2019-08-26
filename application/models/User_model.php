@@ -7,7 +7,22 @@ class User_model extends CI_Model {
 
         return $this->db->get('user')->result_array();
 
+    } 
+
+    public function getPaginationUser($number,$offset) 
+    {
+
+        return $this->db->get('user',$number,$offset)->result_array();
+
     }
+
+    public function totalUserRow()
+    {
+
+        return $this->db->get('user')->num_rows();
+    
+    }
+
     public function addUser() 
     {
         $username = $this->input->post('username');

@@ -2,23 +2,19 @@
 
 class Herbarium_model extends CI_Model {
 
-    public function getFamili() 
+
+    public function totalHerbariumRow()
     {
 
-        return $this->db->get('familia')->result_array();
-
+        return $this->db->get('herbarium')->num_rows();
+    
     }
 
-    public function getPaginationFamili($number,$offset) 
-    {
-
-        return $this->db->get('familia',$number,$offset)->result_array();
-
-    }
-
-    public function totalFamiliRow()
-    {
-        return $this->db->get('familia')->num_rows();
+    public function GetHerbariumById($idHerbarium){
+        $this->db->select('*');
+        $this->db->where('id_herbarium',$idHerbarium);
+        $query = $this->db->get('herbarium');
+        return $query;
     }
 
     public function getEditHebarium()  
@@ -28,12 +24,21 @@ class Herbarium_model extends CI_Model {
 
     }
 
-    public function getHerbarium() {
+    public function getHerbarium($number,$offset) {
 
         $this->db->select('herbarium.species, familia.familia, familia.id_familia, herbarium.id_herbarium, herbarium.leaf_morphology, herbarium.location, herbarium.collection_date, herbarium.collector ');
         $this->db->from('herbarium');
         $this->db->join('familia','familia.id_familia=herbarium.id_familia');
+        $this->db->limit($number,$offset);
         $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function ViewHerbariumById($idHerbarium){
+        $this->db->select('*');
+        $this->db->where('id_herbarium',$idHerbarium);
+        $this->db->join('familia','familia.id_familia=herbarium.id_familia');
+        $query = $this->db->get('herbarium');
         return $query->result_array();
     }
 

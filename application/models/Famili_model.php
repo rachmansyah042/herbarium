@@ -2,6 +2,28 @@
 
 class Famili_model extends CI_Model {
 
+    
+    public function getFamili() 
+    {
+
+        return $this->db->get('familia')->result_array();
+
+    }
+
+    public function getPaginationFamili($number,$offset) 
+    {
+
+        return $this->db->get('familia',$number,$offset)->result_array();
+
+    }
+
+    public function totalFamiliRow()
+    {
+
+        return $this->db->get('familia')->num_rows();
+    
+    }
+
     public function addFamili() 
     {
         $user_id = $this->session->userdata('id_user');

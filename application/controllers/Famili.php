@@ -9,7 +9,6 @@ Class Famili extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('pagination');
         $this->load->library('session');
-        $this->load->model('herbarium_model');
         $this->load->model('famili_model');
         $this->load->helper('form');
         $this->load->helper('url');
@@ -19,7 +18,8 @@ Class Famili extends CI_Controller {
     public function index() {   
 
         // pagination
-        $jumlah_data = $this->herbarium_model->totalFamiliRow();
+        $jumlah_data = $this->famili_model->totalFamiliRow();
+        $data['id_role'] = $this->session->userdata('id_role');
 
         // Membuat Style pagination untuk BootStrap v4
         $config['first_link']       = 'First';
@@ -46,15 +46,15 @@ Class Famili extends CI_Controller {
 		$config['per_page'] = 5;
 		$from = $this->uri->segment(3);
 		$this->pagination->initialize($config);		
-		$data['familia'] = $this->herbarium_model->getPaginationFamili($config['per_page'],$from);
+		$data['familia'] = $this->famili_model->getPaginationFamili($config['per_page'],$from);
 
         if($this->session->userdata('id_user')){
-            $this->load->view('templates/header_admin');
+            $this->load->view('templates/header_admin',$data);
             $this->load->view('admin/admin_famili',$data);
             $this->load->view('templates/footer');
         }
         else{
-            redirect('Auth');
+            redirect('Auth'); 
         }
     }
 
