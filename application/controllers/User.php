@@ -74,6 +74,33 @@ Class User extends CI_Controller {
             }
            
     }
+
+    public function ViewUserById(){
+        $idUser = $this->input->post('idUser');
+        $records = $this->user_model->ViewUserById($idUser);
+        $output = '';
+        foreach($records as $row){
+            $output .= '
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Nama User</label>
+                <div class="form-control">'.$row["name"].'</div>
+            </div>
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Username</label>
+                <div class="form-control">'.$row["username"].'</div>
+            </div>
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Tanggal Pembuatan</label>
+                <div class="form-control">'.date("d-M-Y", strtotime($row["created_at"])).'</div>
+            </div>
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Tanggal Pembaharuan</label>
+                <div class="form-control">'.date("d-M-Y", strtotime($row["updated_at"])).'</div>
+            </div>'
+            ;
+        }
+        echo $output;
+    }
 }
 
 ?>

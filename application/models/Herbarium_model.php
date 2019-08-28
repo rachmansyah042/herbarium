@@ -8,7 +8,7 @@ class Herbarium_model extends CI_Model {
 
         return $this->db->get('herbarium')->num_rows();
     
-    }
+    } 
 
     public function GetHerbariumById($idHerbarium){
         $this->db->select('*');

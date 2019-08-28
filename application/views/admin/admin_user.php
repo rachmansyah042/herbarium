@@ -49,13 +49,33 @@
     </div>
     </div>
 
+     <!-- modal get view -->
+     <div class="modal" id="viewUser" tabindex="-1" role="dialog" aria-labelledby="viewUser" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Lihat User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="viewUserById"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+            </div>
+        </div>
+    </div>
+
     <div class="table-responsive-md">
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
                     <th scope="col" class="text-center">No</th>
                     <th scope="col">Nama Admin</th>
-                    <th scope="col">Famili</th>
                     <th scope="col">Username</th>
                     <th scope="col" class="text-center">Active</th>
                     <th scope="col" class="text-center">Action</th>
@@ -70,11 +90,10 @@
                 <tr>
                     <td scope="row" class="text-center"><?= $no++ ?></td>
                     <td><?= $user['name'] ?></td>
-                    <td>Otto</td>
                     <td>@<?= $user['username'] ?></td>
                     <td class="text-center active">Active</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-success btn-sm">Lihat</button>
+                        <button type="button" data-toggle="modal" data-target="#viewUser" class="btn btn-success btn-sm get_data_user" id="<?= $user['id_user'] ?>">Lihat</button>
                         <button type="button" class="btn btn-info btn-sm">Ubah</button>
                         <button type="button" class="btn btn-danger btn-sm">Non-Aktif</button>
                     </td>

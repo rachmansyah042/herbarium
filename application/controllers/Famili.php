@@ -70,7 +70,81 @@ Class Famili extends CI_Controller {
             redirect('Famili','refresh');
            
             }
-           
+    }
+
+    public function editFamili($id) {
+
+        $result = $this->famili_model->edit($id);
+        // print_r($result);
+        
+ 
+        if($result) {
+ 
+         redirect('famili','refresh');
+ 
+        } else {
+         
+         redirect('famili','refresh');
+        
+         }
+         
+     }
+
+    public function GetFamiliById(){
+        $idFamili = $this->input->post('idFamili');
+        $records = $this->famili_model->GetFamiliById($idFamili);
+        
+        // print_r($idFamili);
+        $output='';
+
+        foreach($records->result_array() as $row){
+            $output .= 
+            '                   
+                <form class="form-signin" action="'.base_url('Famili/editFamili/'.$row['id_familia']).'" method="post" enctype="multipart/form-data">
+                <div class="form-label-group mb-3">
+                    <input name= "id_familia" value="'.$row['id_familia'].'" hidden>
+                    <input type="text" id="familia" name="familia" value="'.$row['familia'].'" class="form-control" placeholder="Nama Famili">
+                    <label for="familia">Nama Famili</label>
+                </div>   
+                
+                <div class="form-label-group mb-3">
+                    <input type="text" id="familia" name="total_herbarium" value="'.$row['total_herbarium'].'" class="form-control" placeholder="Jumlah Herbarium">
+                    <label for="familia">Jumlah Herbarium</label>
+                </div> 
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Ubah</button>
+                </div>
+                ' ;
+            
+        }
+
+        echo($output);
+    }
+
+    public function ViewFamiliById(){
+        $idFamili = $this->input->post('idFamilia');
+        $records = $this->famili_model->ViewFamiliById($idFamili);
+        $output = '';
+        foreach($records as $row){
+            $output .= '
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Nama Famili</label>
+                <div class="form-control">'.$row["familia"].'</div>
+            </div>
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Tanggal Pembuatan</label>
+                <div class="form-control">'.date("d-M-Y", strtotime($row["created_at"])).'</div>
+            </div>
+            <div class="form-group mb-3">
+                <label class="data-title" for="catatan">Tanggal Pembaharuan</label>
+                <div class="form-control">'.date("d-M-Y", strtotime($row["updated_at"])).'</div>
+            </div>'
+            ;
+        }
+        echo $output;
     }
 }
 

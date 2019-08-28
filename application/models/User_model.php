@@ -23,6 +23,16 @@ class User_model extends CI_Model {
     
     }
 
+    public function ViewUserById($idUser)
+    {
+    
+        $this->db->select('*');
+        $this->db->where('id_user',$idUser);
+        $query = $this->db->get('user');
+        return $query->result_array();
+    
+    }
+
     public function addUser() 
     {
         $username = $this->input->post('username');

@@ -29,6 +29,8 @@
 
 <script type="text/javascript">
      // Start jQuery function after page is loaded
+
+    //  edit herbarium
         $(document).ready(function(){
          // Start jQuery click function to view Bootstrap modal when view info button is clicked
             $('.view_data').click(function(){
@@ -57,31 +59,113 @@
          });
      });  
 
-    //  view 
-
-    $('.get_data').click(function(){
+     //  edit famili
+     $(document).ready(function(){
+         // Start jQuery click function to view Bootstrap modal when view info button is clicked
+            $('.view_data_famili').click(function(){
              // Get the id of selected phone and assign it in a variable called phoneData
-                var idHerbarium = $(this).attr('id');
+                var idFamili = $(this).attr('id');
+                // console.log(idFamili);
                 // Start AJAX function
                 $.ajax({
                  // Path for controller function which fetches selected phone data
-                    url: "<?= base_url('Herbarium/ViewHerbariumById') ?>",
+                    url: "<?= base_url('Famili/GetFamiliById') ?>",
                     // Method of getting data
                     method: "POST",
                     // Data is sent to the server
-                    data: {idHerbarium:idHerbarium},
+                    data: {idFamili:idFamili},
                     // Callback function that is executed after data is successfully sent and recieved
                     success: function(data){
                      // Print the fetched data of the selected phone in the section called #phone_result 
                      // within the Bootstrap modal
-                        $('#viewHerById').html(data);
+                    //  console.log(data);
+                        $('#familiResult').html(data);
                         // // Display the Bootstrap modal
                         // Display the Bootstrap modal
-                        $('#viewHerb').modal('show');
+                        $('#editFamili').modal('show');
                     }
-                });
-                // End AJAX function
-            });
+             });
+             // End AJAX function
+         });
+     });  
+
+    //  view herbarium
+    $('.get_data').click(function(){
+        // Get the id of selected phone and assign it in a variable called phoneData
+        var idHerbarium = $(this).attr('id');
+        // Start AJAX function
+        $.ajax({
+            // Path for controller function which fetches selected phone data
+            url: "<?= base_url('Herbarium/ViewHerbariumById') ?>",
+            // Method of getting data
+            method: "POST",
+            // Data is sent to the server
+            data: {idHerbarium:idHerbarium},
+            // Callback function that is executed after data is successfully sent and recieved
+            success: function(data){
+                // Print the fetched data of the selected phone in the section called #phone_result 
+                // within the Bootstrap modal
+                $('#viewHerById').html(data);
+                // // Display the Bootstrap modal
+                // Display the Bootstrap modal
+                $('#viewHerb').modal('show');
+            }
+        });
+        // End AJAX function
+    });
+
+            
+    //  view famili
+    $('.get_data_famili').click(function(){
+        // Get the id of selected phone and assign it in a variable called phoneData
+        var idFamilia = $(this).attr('id');
+        // Start AJAX function
+        $.ajax({
+            // Path for controller function which fetches selected phone data
+            url: "<?= base_url('Famili/ViewFamiliById') ?>",
+            // Method of getting data
+            method: "POST",
+            // Data is sent to the server
+            data: {idFamilia:idFamilia},
+            // Callback function that is executed after data is successfully sent and recieved
+            success: function(data){
+                // Print the fetched data of the selected phone in the section called #phone_result 
+                // within the Bootstrap modal
+            //  console.log(data);
+                $('#viewFamiliyById').html(data);
+                // // Display the Bootstrap modal
+                // Display the Bootstrap modal
+                $('#viewFamili').modal('show');
+            }
+        });
+        // End AJAX function
+    });
+
+    //  view user
+    $('.get_data_user').click(function(){
+        // Get the id of selected phone and assign it in a variable called phoneData
+        var idUser = $(this).attr('id');
+        // Start AJAX function
+        $.ajax({
+            // Path for controller function which fetches selected phone data
+            url: "<?= base_url('User/ViewUserById') ?>",
+            // Method of getting data
+            method: "POST",
+            // Data is sent to the server
+            data: {idUser:idUser},
+            // Callback function that is executed after data is successfully sent and recieved
+            success: function(data){
+                // Print the fetched data of the selected phone in the section called #phone_result 
+                // within the Bootstrap modal
+            //  console.log(data);
+                $('#viewUserById').html(data);
+                // // Display the Bootstrap modal
+                // Display the Bootstrap modal
+                $('#viewUser').modal('show');
+            }
+        });
+        // End AJAX function
+    });
 </script>
 
 
