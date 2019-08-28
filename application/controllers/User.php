@@ -75,6 +75,63 @@ Class User extends CI_Controller {
            
     }
 
+    public function editUser($id) {
+
+        $result = $this->user_model->edit($id);
+        // print_r($result);
+        
+ 
+        if($result) {
+ 
+         redirect('user','refresh');
+ 
+        } else {
+         
+         redirect('user','refresh');
+        
+         }
+         
+    }
+
+    public function GetUserById(){
+        $idUser = $this->input->post('idUser');
+        $records = $this->user_model->GetUserById($idUser);
+        
+        // print_r($idFamili);
+        $output='';
+
+        foreach($records->result_array() as $row){
+            $output .= 
+            '                   
+                <form class="form-signin" action="'.base_url('User/editUser/'.$row['id_user']).'" method="post" enctype="multipart/form-data">
+                <div class="form-label-group mb-3">
+                    <input name="id_user" value="'.$row['id_user'].'" hidden>
+                    <input type="text" id="name" name="name" value="'.$row['name'].'" class="form-control" placeholder="Nama User">
+                    <label for="name">Nama User</label>
+                </div>   
+                
+                <div class="form-label-group mb-3">
+                    <input type="text" id="username" name="username" value="'.$row['username'].'" class="form-control" placeholder="Username">
+                    <label for="username">Username</label>
+                </div> 
+
+                <div class="form-group mb-3">
+                    <label for="password">Password Baru</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password Baru">
+                </div> 
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Ubah</button>
+                </div>
+                ' ;
+            
+        }
+
+        echo($output);
+    }
+
     public function ViewUserById(){
         $idUser = $this->input->post('idUser');
         $records = $this->user_model->ViewUserById($idUser);

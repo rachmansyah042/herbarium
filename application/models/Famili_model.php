@@ -24,7 +24,7 @@ class Famili_model extends CI_Model {
     
     }
 
-    public function GetFamiliById($id)
+    public function GetFamiliById($id) 
     {
         $this->db->select('*');
         $this->db->where('id_familia',$id);

@@ -45,7 +45,7 @@
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" <?= $id_role == '2' ? 'hidden' : '' ?> href="<?= base_url('Famili') ?>">Famili</a>
-          <a class="dropdown-item" href="<?= base_url('Herbarium') ?>">Herbarium</a>
+          <a class="dropdown-item" <?= $id_role == '2' ? 'hidden' : '' ?> href="<?= base_url('Herbarium') ?>">Herbarium</a>
           <a class="dropdown-item" <?= $id_role == '2' ? 'hidden' : '' ?> href="<?= base_url('User') ?>">User</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="<?= base_url('Admin/logout') ?>">Keluar</a>

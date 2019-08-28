@@ -23,21 +23,21 @@
         </div>
         <div class="modal-body">
             
-        <form class="form-signin" action="<?= base_url('User/addUser') ?>" method="post" enctype="multipart/form-data">
-        <div class="form-label-group mb-3">
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username">
-            <label for="username">Username</label>
-        </div>
+            <form class="form-signin" action="<?= base_url('User/addUser') ?>" method="post" enctype="multipart/form-data">
+            <div class="form-label-group mb-3">
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+                <label for="username">Username</label>
+            </div>
 
-        <div class="form-label-group mb-3">
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-            <label for="password">Password</label>
-        </div>
+            <div class="form-label-group mb-3">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
 
-        <div class="form-label-group mb-3">
-            <input type="text" id="nama" name="name" class="form-control" placeholder="Nama">
-            <label for="nama">Nama</label>
-        </div>
+            <div class="form-label-group mb-3">
+                <input type="text" id="nama" name="name" class="form-control" placeholder="Nama">
+                <label for="nama">Nama</label>
+            </div>
 
         </div>
         <div class="modal-footer">
@@ -70,6 +70,24 @@
         </div>
     </div>
 
+     <!-- modal edit -->
+    <div class="modal" id="editUser" tabindex="-1" role="dialog" aria-labelledby="editUser" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ubah User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            
+                <div class="modal-body">
+                    <div id="userResult"></div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="table-responsive-md">
         <table class="table table-hover">
             <thead class="thead-light">
@@ -90,11 +108,11 @@
                 <tr>
                     <td scope="row" class="text-center"><?= $no++ ?></td>
                     <td><?= $user['name'] ?></td>
-                    <td>@<?= $user['username'] ?></td>
+                    <td><?= $user['username'] ?></td>
                     <td class="text-center active">Active</td>
                     <td class="text-center">
                         <button type="button" data-toggle="modal" data-target="#viewUser" class="btn btn-success btn-sm get_data_user" id="<?= $user['id_user'] ?>">Lihat</button>
-                        <button type="button" class="btn btn-info btn-sm">Ubah</button>
+                        <button type="button" data-toggle="modal" data-target="#editUser" class="btn btn-info btn-sm view_data_user" id="<?= $user['id_user'] ?>">Ubah</button>
                         <button type="button" class="btn btn-danger btn-sm">Non-Aktif</button>
                     </td>
                 </tr>

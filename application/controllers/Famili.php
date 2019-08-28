@@ -18,7 +18,7 @@ Class Famili extends CI_Controller {
     public function index() {   
 
         // pagination
-        $jumlah_data = $this->famili_model->totalFamiliRow();
+        $jumlah_data = $this->famili_model->totalFamiliRow(); 
         $data['id_role'] = $this->session->userdata('id_role');
 
         // Membuat Style pagination untuk BootStrap v4
@@ -88,7 +88,8 @@ Class Famili extends CI_Controller {
         
          }
          
-     }
+    }
+
 
     public function GetFamiliById(){
         $idFamili = $this->input->post('idFamili');

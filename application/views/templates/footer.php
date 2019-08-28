@@ -87,6 +87,36 @@
              });
              // End AJAX function
          });
+     }); 
+
+     //  edit famili
+     $(document).ready(function(){
+         // Start jQuery click function to view Bootstrap modal when view info button is clicked
+            $('.view_data_user').click(function(){
+             // Get the id of selected phone and assign it in a variable called phoneData
+                var idUser = $(this).attr('id');
+                // console.log(idFamili);
+                // Start AJAX function
+                $.ajax({
+                 // Path for controller function which fetches selected phone data
+                    url: "<?= base_url('User/GetUserById') ?>",
+                    // Method of getting data
+                    method: "POST",
+                    // Data is sent to the server
+                    data: {idUser:idUser},
+                    // Callback function that is executed after data is successfully sent and recieved
+                    success: function(data){
+                     // Print the fetched data of the selected phone in the section called #phone_result 
+                     // within the Bootstrap modal
+                    //  console.log(data);
+                        $('#userResult').html(data);
+                        // // Display the Bootstrap modal
+                        // Display the Bootstrap modal
+                        $('#editUser').modal('show');
+                    }
+             });
+             // End AJAX function
+         });
      });  
 
     //  view herbarium
