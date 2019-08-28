@@ -93,10 +93,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'db_herbarium',
+	'hostname' => 'herbarium.fahutan.ipb.ac.id',
+	'username' => 'herbarium',
+	'password' => 'yt1I!dPXIMtE',
+	'database' => 'dbherbariumfahutan',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

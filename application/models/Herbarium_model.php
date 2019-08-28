@@ -155,7 +155,7 @@ class Herbarium_model extends CI_Model {
         $local_name = $this->input->post('local_name');
         $leaf_morphology = $this->input->post('leaf_morphology');
         $herbarium_pic = $this->herbariumImage();
-        $real_pic = $this->realImage();;
+        $real_pic = $this->realImage();
         $collection_num = $this->input->post('collection_num');
         $collection_date = $this->input->post('collection_date');
         $convertDate = date("Y-m-d", strtotime($collection_date));
@@ -183,7 +183,7 @@ class Herbarium_model extends CI_Model {
             'notes' => $notes,
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
-            );
+        );
 
         // update herb     
         $this->db->update('herbarium', $data, ['id_herbarium' => $id_herbarium]);
@@ -192,26 +192,22 @@ class Herbarium_model extends CI_Model {
 
         // if familia not change
         if (!($last_familia == $id_familia)) {
-
             //update count herbarium
-        $this->db->where('id_familia', $id_familia);
-        $this->db->set('total_herbarium', 'total_herbarium + 1', FALSE);
-        $this->db->set('updated_at', 'NOW()', FALSE);
-        $this->db->update('familia');
+            $this->db->where('id_familia', $id_familia);
+            $this->db->set('total_herbarium', 'total_herbarium + 1', FALSE);
+            $this->db->set('updated_at', 'NOW()', FALSE);
+            $this->db->update('familia');
 
-        // delete latest famili count
-        $this->db->where('id_familia', $last_familia);
-        $this->db->set('total_herbarium', 'total_herbarium - 1', FALSE);
-        $this->db->set('updated_at', 'NOW()', FALSE);
-        $this->db->update('familia');
-
-
+            // delete latest famili count
+            $this->db->where('id_familia', $last_familia);
+            $this->db->set('total_herbarium', 'total_herbarium - 1', FALSE);
+            $this->db->set('updated_at', 'NOW()', FALSE);
+            $this->db->update('familia');
         }     
 
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
         //update count herbarium
         $id_familia = $this->input->post('id_familia');
 
