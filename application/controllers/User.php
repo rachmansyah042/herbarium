@@ -93,6 +93,22 @@ Class User extends CI_Controller {
          
     }
 
+    public function isActive() {
+        $result = $this->user_model->isActive();
+        // print_r($result);
+        
+ 
+        if($result) {
+ 
+         redirect('user','refresh');
+ 
+        } else {
+         
+         redirect('user','refresh');
+        
+         }
+    }
+
     public function GetUserById(){
         $idUser = $this->input->post('idUser');
         $records = $this->user_model->GetUserById($idUser);

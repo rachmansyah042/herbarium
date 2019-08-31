@@ -42,28 +42,39 @@ class Auth extends CI_Controller {
         $username = $this->input->post('username');
         $password = MD5($this->input->post('password'));
 
-        $user = $this->db->get_where('user', ['username' => $username, 'password' => $password])->result();
-        // var_dump($user);
+        $user = $this->db->get_where('user', ['username' => $username, 'password' => $password])->result_array();
+        // var_dump($user[0]['is_active']);
 
         
         // if user exist
         if($user) {
 
-            foreach ($user as $apps) {
+            if($user[0]['is_active']) {
+        
+                foreach ($user as $apps) {
 
-                $session_data = array(
-                    'id_role'   => $apps->id_role,
-                    'id_user' => $apps->id_user,
-                    'username' => $apps->username,
-                );
-                $this->session->set_userdata($session_data);
-                // print_r($session_data);      
-                
-                redirect('Herbarium');
+                    $session_data = array(
+                        'id_role'   => $apps['id_role'],
+                        'id_user' => $apps['id_user'],
+                        'username' => $apps['username'],
+                        'is_active' => $apps['is_active'],
+                    );
+                    $this->session->set_userdata($session_data);
+                    // print_r($session_data);      
+                    
+                    redirect('Herbarium');
+                }   
             }
 
+            else 
+            {
+                $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Admin Tidak Aktif
+                </div>');
+                  redirect('Auth');
+            }
 
-        } else {
+        }         
+        else {
             $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Username / Password Salah !
             </div>');
               redirect('Auth');

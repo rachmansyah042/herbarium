@@ -95,7 +95,7 @@
                     <th scope="col" class="text-center">No</th>
                     <th scope="col">Nama Admin</th>
                     <th scope="col">Username</th>
-                    <th scope="col" class="text-center">Active</th>
+                    <th scope="col" class="text-center">Status</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
@@ -109,11 +109,26 @@
                     <td scope="row" class="text-center"><?= $no++ ?></td>
                     <td><?= $user['name'] ?></td>
                     <td><?= $user['username'] ?></td>
-                    <td class="text-center active">Active</td>
+                    <td class="text-center <?= $user['is_active'] == 1 ? 'active' : 'non-active' ?>"><?= $user['is_active'] == 1 ? 'Aktif' : 'Non-Aktif' ?></td>
                     <td class="text-center">
+                    <form method="post" action="<?= base_url('User/isActive') ?>">
                         <button type="button" data-toggle="modal" data-target="#viewUser" class="btn btn-success btn-sm get_data_user" id="<?= $user['id_user'] ?>">Lihat</button>
                         <button type="button" data-toggle="modal" data-target="#editUser" class="btn btn-info btn-sm view_data_user" id="<?= $user['id_user'] ?>">Ubah</button>
-                        <button type="button" class="btn btn-danger btn-sm">Non-Aktif</button>
+                    
+                    <?php if ($user['is_active']==1) : ?>
+
+                        <input name="id_user" value="<?= $user['id_user'] ?>" hidden>
+                        <input name="is_active" value="0" hidden>
+                        <button type="submit" class="btn btn-danger btn-sm">Non-Aktif</button>
+                    
+                    <?php else : ?>
+                        
+                        <input name="id_user" value="<?= $user['id_user'] ?>" hidden>
+                        <input name="is_active" value="1" hidden>
+                        <button type="submit" class="btn btn-danger btn-sm">Aktif</button>
+                    
+                    <?php endif; ?>
+                    </form>
                     </td>
                 </tr>
 

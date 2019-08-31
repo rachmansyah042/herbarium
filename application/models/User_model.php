@@ -64,6 +64,7 @@ class User_model extends CI_Model {
 
         $id_user = $this->input->post('id_user');
         $id_role = '2';
+        $is_active = 1;
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $name = $this->input->post('name');
@@ -73,7 +74,8 @@ class User_model extends CI_Model {
                 'id_user' => $id_user,
                 'username' => $username,
                 'name' => $name,
-                'id_role' => '2',
+                'is_active' => $is_active,
+                'id_role' => $id_role,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
                 );
@@ -84,11 +86,32 @@ class User_model extends CI_Model {
                 'username' => $username,
                 'password' => MD5($password),
                 'name' => $name,
-                'id_role' => '2',
+                'is_active' => $is_active,
+                'id_role' => $id_role,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
                 );
         }
+
+        // update user    
+        $this->db->update('user', $data, ['id_user' => $id_user]);
+    
+    }
+
+    public function isActive()
+    {
+        $id_user = $this->input->post('id_user');
+        $id_role = '2';
+        $is_active = $this->input->post('is_active');
+
+            $data = array(
+                'id_user' => $id_user,
+                'is_active' => $is_active,
+                'id_role' => $id_role,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+                );
+      
 
         // update user    
         $this->db->update('user', $data, ['id_user' => $id_user]);
